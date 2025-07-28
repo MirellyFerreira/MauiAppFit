@@ -43,5 +43,18 @@ namespace MauiAppFit.Helpers
             );
         }
 
+        public Task<int> Delete (int id)
+        {
+            return _db.Table<Atividade>().DeelteAsync(i => i.Id == id);
+        }
+
+        public Task<List<Atividade>> Search(string q)
+        {
+            string sql = "SELECT * FROM Atividade " +
+                         "WHERE Descricao LIKE '%" + q + "%'";
+
+            return _db.QueryAsync<Atividade>(sql);
+        }
+
     }
 }
